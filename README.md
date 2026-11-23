@@ -14,3 +14,4 @@ sh .openchamber/dev stop
 The test writes the worktree identifier to PostgreSQL and to a local file.
 Run it in two worktrees to check that each sees its own data. The stop
 command keeps the worktree database volume for a later start.
+OpenChamber agent worktree verification.
