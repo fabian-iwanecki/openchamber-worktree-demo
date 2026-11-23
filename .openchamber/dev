@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+worktree=$(git rev-parse --show-toplevel)
+worktree=$(cd "$worktree" && pwd -P)
+if command -v sha256sum >/dev/null 2>&1; then
+    checksum=$(printf '%s' "$worktree" | sha256sum)
+else
+    checksum=$(printf '%s' "$worktree" | shasum -a 256)
+fi
+project=wt-$(printf '%.24s' "$checksum")
+
+compose() {
+    docker compose --project-name "$project" --project-directory "$worktree" \
+        --file "$worktree/.openchamber/compose.yaml" "$@"
+}
+
+case "${1:-}" in
+    start) compose up -d --build --wait ;;
+    build|test|runtime) compose exec -T dev sh .openchamber/commands "$1" ;;
+    stop) compose down ;;
+    name) printf '%s\n' "$project" ;;
+    *) printf 'Usage: %s {start|build|test|stop|runtime|name}\n' "$0" >&2; exit 2 ;;
+esac

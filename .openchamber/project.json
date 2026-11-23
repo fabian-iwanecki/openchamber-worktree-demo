@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "setupWorktree": ["sh .openchamber/dev start"],
+  "setupWorktreeWait": true,
+  "teardownWorktree": ["sh .openchamber/dev stop"],
+  "projectActions": [
+    { "id": "build", "name": "Build", "command": "sh .openchamber/dev build" },
+    { "id": "test", "name": "Test", "command": "sh .openchamber/dev test" }
+  ]
+}

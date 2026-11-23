@@ -1,0 +1,13 @@
+{
+  "name": "openchamber-worktree-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node --check smoke.test.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "pg": "8.16.3"
+  }
+}

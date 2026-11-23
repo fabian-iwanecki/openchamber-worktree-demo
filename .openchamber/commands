@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+case "$1" in
+    build) npm run build ;;
+    test) npm test ;;
+    runtime)
+        node --version
+        npm --version
+        ;;
+esac
